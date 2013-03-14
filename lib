@@ -31,26 +31,31 @@ $(LIBNAME).$(LIBEXT): $(LIB_OBJS) symbols
 %.o: %.c *.h
 	@echo "  CC" $@;$(CC) $(SYSROOT) -c $(LIB_CFLAGS) $< -o $@
 
+LIBDIR ?= $(PREFIX)/lib
+#$(P64)
+
 all: $(LIB_TARGETS)
 CLEAN_FILES += $(LIB_TARGETS) $(LIB_OBJS)
 install: _install_lib
 uninstall: _uninstall_lib
 _uninstall_lib:
-	rm -f $(INSTALL_PREFIX)/lib$(P64)/$(LIBNAME).$(LIBEXT)
-	rm -f $(INSTALL_PREFIX)/lib$(P64)/$(LIBNAME).a
-	rm -f $(INSTALL_PREFIX)/lib$(P64)/pkgconfig/$(PROJECT_NAME).pc
-	rm -rf $(INSTALL_PREFIX)/include/$(PROJECT_NAME)
-_install_lib: $(LIB_TARGETS)
-	install -d $(INSTALL_PREFIX)/lib$(P64)
-	install -t $(INSTALL_PREFIX)/lib$(P64) $(LIBNAME).$(LIBEXT)
-	install -t $(INSTALL_PREFIX)/lib$(P64) $(LIBNAME).a
-	install -d $(INSTALL_PREFIX)/lib$(P64)/pkgconfig
-	install -t $(INSTALL_PREFIX)/lib$(P64)/pkgconfig $(PROJECT_NAME).pc
-	install -d $(INSTALL_PREFIX)/include/$(PROJECT_NAME)
-	install -t $(INSTALL_PREFIX)/include/$(PROJECT_NAME) $(INSTALLED_HEADERS)
+	rm -f $(DESTDIR)$(LIBDIR)/$(LIBNAME).$(LIBEXT)
+	rm -f $(DESTDIR)$(LIBDIR)/$(LIBNAME).a
+	rm -f $(DESTDIR)$(LIBDIR)/pkgconfig/$(PROJECT_NAME).pc
+	rm -rf $(DESTDIR)$(PREFIX)/include/$(PROJECT_NAME)
+_install_lib: buildapi-install-runtime buildapi-install-devel
+	
+buildapi-install-runtime: $(LIB_TARGETS)
+	install -d $(DESTDIR)$(LIBDIR)
+	install -t $(DESTDIR)$(LIBDIR) $(LIBNAME).$(LIBEXT)
+	install -t $(DESTDIR)$(LIBDIR) $(LIBNAME).a
+	install -d $(DESTDIR)$(LIBDIR)/pkgconfig
 	@ldconfig 2> /dev/null || true
-
-
+buildapi-install-devel: $(PROJECT_NAME).pc
+	install -d $(DESTDIR)$(LIBDIR)/pkgconfig
+	install -t $(DESTDIR)$(LIBDIR)/pkgconfig $(PROJECT_NAME).pc
+	install -d $(DESTDIR)$(PREFIX)/include/$(PROJECT_NAME)
+	install -t $(DESTDIR)$(PREFIX)/include/$(PROJECT_NAME) $(INSTALLED_HEADERS)
 
 
 # ############ examples ################

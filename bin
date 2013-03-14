@@ -21,13 +21,14 @@ $(BINARY).efence: $(BIN_CFILES) $(LIBNAME_A)
 
 all: $(BIN_TARGETS)
 CLEAN_FILES += $(BIN_TARGETS) $(BINARY).efence
+buildapi-install-runtime: _install_bin
 install: _install_bin
 uninstall: _uninstall_bin
 _install_bin: $(BIN_TARGETS)
-	install -d $(INSTALL_PREFIX)/bin
-	install -t $(INSTALL_PREFIX)/bin $(BIN_TARGETS)
+	install -d $(DESTDIR)$(PREFIX)/bin
+	install -t $(DESTDIR)$(PREFIX)/bin $(BIN_TARGETS)
 _uninstall_bin:
-	sudo rm -f $(INSTALL_PREFIX)/bin/$(BINARY)
+	sudo rm -f $(DESTDIR)$(PREFIX)/bin/$(BINARY)
 
 help: _binhelp
 _binhelp:

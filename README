@@ -13,7 +13,9 @@ processes grow it might be growin in capability.
 
 How to use:
   drop a symlink into your project and include the parts needed from
-  you main Makefile with import .mm/lib
+  you main Makefile with import .mm/lib inside your own makefile - see the
+  examples for a few skeleton projects that even use their directorys
+  name as the basis for configuring the project name.
 
 Desirable todos:
   On dist: create a bundle of the included makefiles and drop it in as the

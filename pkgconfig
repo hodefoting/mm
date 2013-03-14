@@ -22,12 +22,13 @@ all: $(PROJECT_NAME).pc
 
 CLEAN_FILES += $(PROJECT_NAME).pc
 
+buildapi-install-devel: _install_pkg
 install: _install_pkg
 uninstall: _uninstall_pkg
 
 _uninstall_pkg:
-	rm -f $(INSTALL_PREFIX)/lib$(P64)/pkgconfig/$(PROJECT_NAME).pc
+	rm -f $(DESTDIR)$(LIBDIR)/pkgconfig/$(PROJECT_NAME).pc
 
 _install_pkg: $(LIB_TARGETS)
-	install -d $(INSTALL_PREFIX)/lib$(P64)/pkgconfig
-	install -t $(INSTALL_PREFIX)/lib$(P64)/pkgconfig $(PROJECT_NAME).pc
+	install -d $(DESTDIR)$(LIBDIR)/pkgconfig
+	install -t $(DESTDIR)$(LIBDIR)/pkgconfig $(PROJECT_NAME).pc
