@@ -26,7 +26,8 @@ install: _install_pkg
 uninstall: _uninstall_pkg
 
 _uninstall_pkg:
-	sudo rm -f $(PREFIX)/lib$(P64)/pkgconfig/$(PROJECT_NAME).pc
+	rm -f $(INSTALL_PREFIX)/lib$(P64)/pkgconfig/$(PROJECT_NAME).pc
 
 _install_pkg: $(LIB_TARGETS)
-	sudo install -t $(PREFIX)/lib$(P64)/pkgconfig $(PROJECT_NAME).pc
+	install -d $(INSTALL_PREFIX)/lib$(P64)/pkgconfig
+	install -t $(INSTALL_PREFIX)/lib$(P64)/pkgconfig $(PROJECT_NAME).pc

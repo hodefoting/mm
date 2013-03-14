@@ -36,18 +36,19 @@ CLEAN_FILES += $(LIB_TARGETS) $(LIB_OBJS)
 install: _install_lib
 uninstall: _uninstall_lib
 _uninstall_lib:
-	sudo rm -f $(PREFIX)/lib$(P64)/$(LIBNAME).$(LIBEXT)
-	sudo rm -f $(PREFIX)/lib$(P64)/$(LIBNAME).a
-	sudo rm -f $(PREFIX)/lib$(P64)/pkgconfig/$(PROJECT_NAME).pc
-	sudo rm -rf $(PREFIX)/include/$(PROJECT_NAME)
+	rm -f $(INSTALL_PREFIX)/lib$(P64)/$(LIBNAME).$(LIBEXT)
+	rm -f $(INSTALL_PREFIX)/lib$(P64)/$(LIBNAME).a
+	rm -f $(INSTALL_PREFIX)/lib$(P64)/pkgconfig/$(PROJECT_NAME).pc
+	rm -rf $(INSTALL_PREFIX)/include/$(PROJECT_NAME)
 _install_lib: $(LIB_TARGETS)
-	sudo install -t $(PREFIX)/lib$(P64) $(LIBNAME).$(LIBEXT)
-	sudo install -t $(PREFIX)/lib$(P64) $(LIBNAME).a
-	sudo install -d $(PREFIX)/lib$(P64)/pkgconfig
-	sudo install -t $(PREFIX)/lib$(P64)/pkgconfig $(PROJECT_NAME).pc
-	sudo install -d $(PREFIX)/include/$(PROJECT_NAME)
-	sudo install -t $(PREFIX)/include/$(PROJECT_NAME) $(INSTALLED_HEADERS)
-	sudo ldconfig
+	install -d $(INSTALL_PREFIX)/lib$(P64)
+	install -t $(INSTALL_PREFIX)/lib$(P64) $(LIBNAME).$(LIBEXT)
+	install -t $(INSTALL_PREFIX)/lib$(P64) $(LIBNAME).a
+	install -d $(INSTALL_PREFIX)/lib$(P64)/pkgconfig
+	install -t $(INSTALL_PREFIX)/lib$(P64)/pkgconfig $(PROJECT_NAME).pc
+	install -d $(INSTALL_PREFIX)/include/$(PROJECT_NAME)
+	install -t $(INSTALL_PREFIX)/include/$(PROJECT_NAME) $(INSTALLED_HEADERS)
+	@ldconfig 2> /dev/null || true
 
 
 

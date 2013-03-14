@@ -11,7 +11,6 @@ BIN_LD_FLAGS += $(LD_FLAGS) $(LIB_LD_FLAGS)
 BIN_CFLAGS += $(shell test "$(BIN_PKGMODULES)" 2>/dev/null && pkg-config $(BIN_PKGMODULES) --cflags)
 BIN_LD_FLAGS += $(shell test "$(BIN_PKGMODULES)" 2>/dev/null && pkg-config $(BIN_PKGMODULES) --libs)
 
-
 $(BINARY): $(BIN_CFILES) $(LIBNAME_A)
 	@echo "CCLD" $@; $(CC) $(SYSROOT) -I .. $(BIN_CFLAGS) $(BIN_LD_FLAGS)  \
 		$(BIN_CFILES) $(LIBNAME_A) -o $@
@@ -25,9 +24,10 @@ CLEAN_FILES += $(BIN_TARGETS) $(BINARY).efence
 install: _install_bin
 uninstall: _uninstall_bin
 _install_bin: $(BIN_TARGETS)
-	sudo install -t $(PREFIX)/bin $(BIN_TARGETS)
+	install -d $(INSTALL_PREFIX)/bin
+	install -t $(INSTALL_PREFIX)/bin $(BIN_TARGETS)
 _uninstall_bin:
-	sudo rm -f $(PREFIX)/bin/$(BINARY)
+	sudo rm -f $(INSTALL_PREFIX)/bin/$(BINARY)
 
 help: _binhelp
 _binhelp:

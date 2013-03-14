@@ -13,8 +13,8 @@ all: $(GIR_VERSIONED).typelib
 CLEAN_FILES+=$(GIR_VERSIONED).gir $(GIR_VERSIONED).typelib
 install: _install_gir
 _install_gir:: $(GIR_VERSIONED).typelib
-	sudo install -d $(PREFIX)/girepository-1.0
-	sudo install -t $(PREFIX)/girepository-1.0 $(GIR_VERSIONED).typelib
+	sudo install -d $(INSTALL_PREFIX)/girepository-1.0
+	sudo install -t $(INSTALL_PREFIX)/girepository-1.0 $(GIR_VERSIONED).typelib
 uninstall: _install_gir
 _uninstall_gir:
-	sudo rm -rf $(PREFIX)/girepository-1.0/$(GIR_VERSIONED).typelib
+	sudo rm -rf $(INSTALL_PREFIX)/girepository-1.0/$(GIR_VERSIONED).typelib
