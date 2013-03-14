@@ -7,7 +7,8 @@ CFLAGS += -fPIC
 CFLAGS += -fomit-frame-pointer
 CFLAGS += -funroll-loops -fforce-addr -ftracer -fpeel-loops -fmerge-all-constants
 CFLAGS += -Wno-unused-parameter  -Wno-sign-compare
-CFLAGS +=  -I. -D_XOPEN_SOURCE=500 
+CFLAGS +=  -I. -D_XOPEN_SOURCE=500
+CFLAGS += -std=c99
 
 # icky, should perhaps be moved to a commen start include
 
