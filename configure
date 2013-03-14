@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# magic make projects do not really need a configure, one is
+# provided though for some pre-build sanity checking as well
+# as providing a common interface to specifying things like
+# the desired installation prefix.
+
+# buildapi-variable-no-builddir
+# buildapi-variable-supports-runtime-devel
+
 echo > config
 while [ "$1" ] ; do
   if ( echo $1 | grep "^--prefix=" > /dev/null ); then
@@ -38,10 +46,5 @@ deps='pkg-config make sed'
 for a in $deps;do which $a || ( echo "$a missing"; exit);done
 
 make _pkgtest || exit
-echo ""
-
-echo "Announcing buildapi compatibility"
-echo "   buildapi-variable-no-builddir  buildapi-variable-supports-runtime-devel"
-
 echo ""
 echo "It seems like we are ready for make"

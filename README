@@ -21,9 +21,3 @@ Desirable todos:
   On dist: create a bundle of the included makefiles and drop it in as the
   makefile in the directory - leaving the distribution with a simpler file
   structure.
-
-  generate a autotools environment on dist - that is dist-checked, piggy
-  backing on autotools for satisfying distro people - permitting fluid build
-  environment with short feed-back loop for developers.
-
-  align variable naming with autotools - just because it can be possible?
