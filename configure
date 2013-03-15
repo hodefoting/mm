@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # magic make projects do not really need a configure, one is
 # provided though for some pre-build sanity checking as well
