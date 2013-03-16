@@ -1,4 +1,3 @@
-PROJECT_VERSION     ?= $(API_VERSION).0
 PROJECT_DESCRIPTION ?= ".."
 
 PKG_REQUIRES ?= $(LIB_PKGMODULES)
@@ -13,7 +12,7 @@ $(PROJECT_NAME).pc:
 	@echo >> $@
 	@echo Name: $(PROJECT_NAME) >> $@
 	@echo Description: $(PROJECT_DESCRIPTION) >> $@
-	@echo Version: $(PROJECT_VERSION) >> $@
+	@echo Version: $(LIB_VERSION) >> $@
 	@test "$(PKG_REQUIRES)" && echo Requires: $(PKG_REQUIRES) >> $@ || true
 	@echo Libs:    -L\$${libdir} -l$(PROJECT_NAME) >> $@
 	@echo Cflags:  -I\$${includedir}/$(PROJECT_NAME)   >> $@
