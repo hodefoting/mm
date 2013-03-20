@@ -21,7 +21,7 @@ $(LIBNAME).a: $(LIB_OBJS)
 CLEAN_FILES += symbols
 
 symbols: Makefile $(LIB_OBJS)
-	@echo " gen" $@;  nm -a $(LIB_OBJS) | grep " T " | cut -f 3 -d ' ' | grep "^$(SYMBOL_PREFIX)" | grep -v "^_" > $@
+	@echo " gen" $@;  nm -a $(LIB_OBJS) | grep " T " | cut -f 3 -d ' ' | grep "^$(SYMBOL_PREFIX)" | grep -v "^_" | sort > $@
 
 $(LIBNAME).$(LIBEXT): $(LIB_OBJS) symbols
 	@echo "  LD" $@;$(LD) --retain-symbols-file=symbols -shared $(LIB_OBJS) -o $@ $(LIB_LD_FLAGS)
