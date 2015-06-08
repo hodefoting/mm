@@ -45,9 +45,9 @@ output/%: %$(TEST_EXT) $(RUN_DEP) Makefile
 	@cat output/$@
 
 
-TEXT_GREEN=echo -e "\033[1;32m"
-TEXT_NORMAL=echo -e "\033[0m"
-TEXT_RED=echo -e "\033[1;31m"
+TEXT_GREEN=echo -en "\033[1;32m"
+TEXT_NORMAL=echo -en "\033[0m"
+TEXT_RED=echo -en "\033[1;31m"
 
 update: *$(TEST_EXT) $(RUN_DEP)
 	@echo "Running tests: "
